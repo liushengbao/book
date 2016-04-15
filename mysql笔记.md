@@ -1,89 +1,94 @@
-ËÑË÷±íÖĞÄ³text ×Ö¶Î°üº¬Ä³Ğ©×Ö·û´®µÄĞĞ
-SELECT role_name,arg02_json FROM cross_role WHERE find_in_set('"worldZoneId":1}', arg02_json); 
-´´½¨ÓÃ»§
+#mysqlç¬”è®°
+---
+## æƒé™ç®¡ç† 
+###æœç´¢è¡¨ä¸­æŸtext å­—æ®µåŒ…å«æŸäº›å­—ç¬¦ä¸²çš„è¡Œ
+SELECT role_name,arg02_json FROM cross_role WHERE find_in_set('"worldZoneId":1}', arg02_json);
+###åˆ›å»ºç”¨æˆ·
 CREATE USER lsb IDENTIFIED BY 'password';
-grant ·ÖÅäÈ¨ÏŞ
+###åˆ†é…æƒé™grant(ç»™æ¥è‡ªip localhost çš„ lsb èµ‹äºˆ db1 åº“çš„æ‰€æœ‰è¡¨çš„æ‰€æœ‰æƒé™,å¹¶è®¾å®šè¿æ¥å£ä»¤ password) 
 GRANT ALL PRIVILEGES ON db1.* TO 'lsb'@'localhost' IDENTIFIED BY 'password';
-¸øÀ´×Ôip localhost µÄ lsb ¸³Óè db1 ¿âµÄËùÓĞ±íµÄËùÓĞÈ¨ÏŞ,²¢Éè¶¨Á¬½Ó¿ÚÁî password
-È¡ÏûÈ¨ÏŞ
+###å–æ¶ˆæƒé™
 EVOKE ALL PRIVILEGES ON *.* FROM 'username'@'localhost'; 
-Ö»¸øSELECT, UPDATEÈ¨ÏŞ
+### åªç»™SELECT, UPDATEæƒé™
 GRANT SELECT, UPDATE ON wordpress.* TO 'username'@'localhost' IDENTIFIED BY 'password';
-Ë¢ĞÂÈ¨ÏŞ
+###åˆ·æ–°æƒé™
 FLUSH PRIVILEGES;
-É¾³ı¸Õ²Å´´½¨µÄÓÃ»§
-DROP USER username@localhost;
-//ÏÔÊ¾Ò»¸ö¿â×ÜµÄËùÓĞ±í
+###åˆ é™¤åˆšæ‰åˆ›å»ºçš„ç”¨æˆ·
+###DROP USER username@localhost;
+
+----------
+
+##æŸ¥è¯¢ç›¸å…³
+###æ˜¾ç¤ºä¸€ä¸ªåº“æ€»çš„æ‰€æœ‰è¡¨
 show full tables 
 show tables 
-
-ÏÔÊ¾Ä³¸ö±íµÄ×Ö¶Î
+###æ˜¾ç¤ºæŸä¸ªè¡¨çš„å­—æ®µ
 show full fields from table_name;
 describe table_name;
 
-ÏÔÊ¾mysql °æ±¾ºÅ
+###æ˜¾ç¤ºmysql ç‰ˆæœ¬å·
 select version();
-²é¿´ ËùÓĞµÄ´¥·¢Æ÷
+###æŸ¥çœ‹æ‰€æœ‰çš„è§¦å‘å™¨
 select * from information_schema.'TRIGGERS';
-
-´¥·¢Æ÷(trigger)£º¼àÊÓÄ³ÖÖÇé¿ö£¬²¢´¥·¢Ä³ÖÖ²Ù×÷¡£
-´¥·¢Æ÷´´½¨Óï·¨ËÄÒªËØ£º1.¼àÊÓµØµã(table) 2.¼àÊÓÊÂ¼ş(insert/update/delete) 3.´¥·¢Ê±¼ä(after/before) 4.´¥·¢ÊÂ¼ş(insert/update/delete)
+###è§¦å‘å™¨(trigger)ï¼šç›‘è§†æŸç§æƒ…å†µï¼Œå¹¶è§¦å‘æŸç§æ“ä½œã€‚
+####è§¦å‘å™¨åˆ›å»ºè¯­æ³•å››è¦ç´ ï¼š
+1. ç›‘è§†åœ°ç‚¹(table) 
+2. ç›‘è§†äº‹ä»¶(insert/update/delete) 
+3. è§¦å‘æ—¶é—´(after/before) 
+4. è§¦å‘äº‹ä»¶(insert/update/delete)<BR/>
 delimiter $
 create trigger triggerName
-after/before insert/update/delete on ±íÃû
-for each row   #Õâ¾ä»°ÔÚmysqlÊÇ¹Ì¶¨µÄ
+after/before insert/update/delete on è¡¨å
+for each row   #è¿™å¥è¯åœ¨mysqlæ˜¯å›ºå®šçš„
 begin
-sqlÓï¾ä;
+sqlè¯­å¥;
 end;
-
-truncate table `kf_merge_temp`  Çå³ıÄ³¸ö±íµÄÊı¾İ
-
-Ìí¼ÓË÷Òı
-1.PRIMARY  KEY£¨Ö÷¼üË÷Òı£©
+###æ¸…é™¤æŸä¸ªè¡¨çš„æ•°æ®
+truncate table `kf_merge_temp`  
+###æ·»åŠ ç´¢å¼•
+1. PRIMARY  KEYï¼ˆä¸»é”®ç´¢å¼•ï¼‰
 mysql>ALTER  TABLE  `table_name`  ADD  PRIMARY  KEY (  `column`  ) 
-2.UNIQUE(Î¨Ò»Ë÷Òı)
+2. UNIQUE(å”¯ä¸€ç´¢å¼•)
         mysql>ALTER  TABLE  `table_name`  ADD  UNIQUE (`column` ) 
-3.INDEX(ÆÕÍ¨Ë÷Òı)
+3. INDEX(æ™®é€šç´¢å¼•)
 mysql>ALTER  TABLE  `table_name`  ADD  INDEX index_name (  `column`  )
-4.FULLTEXT(È«ÎÄË÷Òı)
+4. FULLTEXT(å…¨æ–‡ç´¢å¼•)
 mysql>ALTER  TABLE  `table_name`  ADD  FULLTEXT ( `column` )
-5.¶àÁĞË÷Òı
+5. å¤šåˆ—ç´¢å¼•
 mysql>ALTER  TABLE  `table_name`  ADD  INDEX index_name (  `column1`,  `column2`,  `column3`  )
 
-UNIX Ê±¼äº¯Êı
-UNIXÊ±¼ä´Á×ª»»ÎªÈÕÆÚÓÃº¯Êı£ºFROM_UNIXTIME()
+##UNIX æ—¶é—´å‡½æ•°
+UNIXæ—¶é—´æˆ³è½¬æ¢ä¸ºæ—¥æœŸç”¨å‡½æ•°ï¼šFROM_UNIXTIME()
+æ—¥æœŸè½¬æ¢ä¸ºUNIXæ—¶é—´æˆ³ç”¨å‡½æ•°ï¼š UNIX_TIMESTAMP()
 
-ÈÕÆÚ×ª»»ÎªUNIXÊ±¼ä´ÁÓÃº¯Êı£º UNIX_TIMESTAMP()
+##locateæ˜¯æŸ¥æ‰¾ç¬¬ä¸€ä¸ªå‚æ•°åœ¨ç¬¬äºŒä¸ªå‚æ•°ä¸­çš„ä½ç½®, ä¸å­˜åœ¨æ—¶è¿”å›å€¼ä¸º0
 
-locateÊÇ²éÕÒµÚÒ»¸ö²ÎÊıÔÚµÚ¶ş¸ö²ÎÊıÖĞµÄÎ»ÖÃ, ²»´æÔÚÊ±·µ»ØÖµÎª0
+##concatæ˜¯è¿æ¥å„ä¸ªå‚æ•°
 
-concatÊÇÁ¬½Ó¸÷¸ö²ÎÊı
+##deleteè¯­å¥æ˜¯dml,è¿™ä¸ªæ“ä½œä¼šæ”¾åˆ°rollback segementä¸­,äº‹åŠ¡æäº¤ä¹‹åæ‰ç”Ÿæ•ˆ;å¦‚æœæœ‰ç›¸åº”çš„trigger,æ‰§è¡Œçš„æ—¶å€™å°†è¢«è§¦å‘.  
+##truncate,dropæ˜¯ddl, æ“ä½œç«‹å³ç”Ÿæ•ˆ,åŸæ•°æ®ä¸æ”¾åˆ°rollback segmentä¸­,ä¸èƒ½å›æ»š. æ“ä½œä¸è§¦å‘trigger. 
 
-deleteÓï¾äÊÇdml,Õâ¸ö²Ù×÷»á·Åµ½rollback segementÖĞ,ÊÂÎñÌá½»Ö®ºó²ÅÉúĞ§;Èç¹ûÓĞÏàÓ¦µÄtrigger,Ö´ĞĞµÄÊ±ºò½«±»´¥·¢.  
-truncate,dropÊÇddl, ²Ù×÷Á¢¼´ÉúĞ§,Ô­Êı¾İ²»·Åµ½rollback segmentÖĞ,²»ÄÜ»Ø¹ö. ²Ù×÷²»´¥·¢trigger. 
-
-¸üĞÂÄ³¸öÍæ¼ÒµÄµ¥¸ö×Ö¶Î 
+##æ›´æ–°æŸä¸ªç©å®¶çš„å•ä¸ªå­—æ®µ 
 update kf_dataext_player set bowsData = null where playerId = 230008662001;
 
-ËÑË÷Õû¸ö±í Ä³¸ö×Ö¶ÎÓĞÖµµÄĞĞ
+##æœç´¢æ•´ä¸ªè¡¨ æŸä¸ªå­—æ®µæœ‰å€¼çš„è¡Œ
 select playerId,bowsData from kf_dataext_player where bowsData is not null;
-»òÕß
+æˆ–è€…
 select playerId,bowsData from kf_dataext_player where char_length(bowsData) > 0;
 
 
- ×ó²¿Á¬½Ó
+ ##å·¦éƒ¨è¿æ¥
  SELECT * FROM java LEFT JOIN mysql ON java.name=mysql.name;
- ÓÒ²¿Á¬½Ó
+ ##å³éƒ¨è¿æ¥
  SELECT * FROM java RIGHT JOIN mysql ON java.name=mysql.name;
 
 
-¼ÆËã¸Ã×Ö¶ÎµÄÊıÁ¿    (schema ¸ÅÒª)  
+##è®¡ç®—è¯¥å­—æ®µçš„æ•°é‡    (schema æ¦‚è¦)  
 SELECT count(*) 
 FROM information_schema.COLUMNS 
 WHERE TABLE_SCHEMA = 'gongfu_s1' 
 AND TABLE_NAME = 'kf_dataext_player' 
 AND COLUMN_NAME = 'bowsData'
-
 
 select * from (
 SELECT count(*) count_num, sch.TABLE_SCHEMA schema_name
@@ -94,14 +99,15 @@ group by sch.TABLE_SCHEMA order by sch.TABLE_SCHEMA asc
 where aa.count_num=0
 ;
 
-²éÄ³¸ö±íµÄÒıÇæ £¨information_schema  £º Ìá¹©ÁËµ±Ç°mysqlÊµÀıÖĞËùÓĞÊı¾İ¿âµÄĞÅÏ¢¡££©
+###æŸ¥æŸä¸ªè¡¨çš„å¼•æ“ ï¼ˆinformation_schema  ï¼š æä¾›äº†å½“å‰mysqlå®ä¾‹ä¸­æ‰€æœ‰æ•°æ®åº“çš„ä¿¡æ¯ã€‚ï¼‰
 select engine from information_schema.TABLES where TABLE_NAME = 'kf_player' and TABLE_SCHEMA = 'kungfu_qq';
 
 
 select playerName,info.gunScore from dt_player player inner join  dt_player_data_info info on player.playerId = info.playerId where info.gunScore>0;
 
+### MySQL SQLè¯­å¥æ€§èƒ½åˆ†æ
 set profiling =1;
 
-//ÉèÖÃµ±Ç°»ØºÏµÄÊÂÎñ¸ôÀë¼¶±ğ
+### è®¾ç½®å½“å‰å›åˆçš„äº‹åŠ¡éš”ç¦»çº§åˆ«
 SET session transaction isolation level read committed;
 
