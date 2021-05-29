@@ -34,6 +34,11 @@ git pull https://github.com/liushengbao/book.git
 git status
 #跟踪一个文件
 git add fileName
+#将暂存区内容添加到本地仓库中
+git commit -m "注释"
 
+
+#git 终端中文显示乱码解决
+git config --global core.quotepath false
 
 
