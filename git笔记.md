@@ -32,7 +32,7 @@ git push origin master
 git pull https://github.com/liushengbao/book.git
 #查看文件状态
 git status
-#跟踪一个文件
+#跟踪一个文件，多次修改一个文件需要重新git add
 git add fileName
 #将暂存区内容添加到本地仓库中
 git commit -m "注释"
